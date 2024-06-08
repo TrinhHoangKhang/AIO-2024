@@ -2,6 +2,11 @@ import math
 import random
 
 def compute_loss():
+    '''
+    This function computes loss value 
+    Available loss functions: MSE, MAE, RMSE
+    
+    '''
     # Get number of samples
     print('Input number of samples (integer number) which are generated: ', end='')
     n = input()
