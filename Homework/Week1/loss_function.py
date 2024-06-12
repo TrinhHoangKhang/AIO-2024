@@ -50,7 +50,7 @@ def compute_loss():
     elif loss == 'RMSE':
         final_loss = math.sqrt(final_loss / n)
 
-    print(f'final {loss}: {finalLoss}')
+    print(f'final {loss}: {final_loss}')
 
 
 # Test
