@@ -15,12 +15,14 @@ Cách 1: Brute force
 Kiểm tra từng cửa sổ
 Với từng cửa sổ, ta dò tuyến tính để tìm số lớn nhất
 '''
+
+
 def solve1(num_list, k):
     # Kiểm tra list có đủ dài không
     if len(num_list) < k:
-        print ('List có độ dài nhỏ hơn k!')
-        return 
-    
+        print('List có độ dài nhỏ hơn k!')
+        return
+
     result = []
 
     # Duyệt từng cửa sổ
@@ -45,32 +47,34 @@ Mỗi khi dịch chuyển cửa sổ, ta sẽ thêm phần tử mới vào cuố
 - Nếu phần tử mới thêm vào lớn hơn phần tử đầu deque, thì cứ pop phần tử đầu ra
 - Hoặc nếu độ dài deque lớn hơn k, pop phần tử đầu ra
 '''
+
+
 def solve2(num_list, k):
     # Kiểm tra list có đủ dài không
     if len(num_list) < k:
-        print ('List có độ dài nhỏ hơn k!')
+        print('List có độ dài nhỏ hơn k!')
         return
-    
+
     result = []
     deq = deque()
-    deq.append(numList[0]) # Thêm sẵn 2 phần tử đầu tiên
+    deq.append(numList[0])  # Thêm sẵn 2 phần tử đầu tiên
     deq.append(numList[1])
 
-    for i in range(2, len(num_list)): # Duyệt từ phần tử thứ 3 đến cuối
+    for i in range(2, len(num_list)):  # Duyệt từ phần tử thứ 3 đến cuối
         deq.append(numList[i])
 
         while (deq[0] < deq[-1]) or len(deq) > k:
             deq.popleft()
 
         result.append(deq[0])
-    
+
     return result
+
 
 # Test
 if __name__ == "__main__":
-    numList = [3, 4, 5, 1, -44 , 5 ,10, 12 ,33, 1]
+    numList = [3, 4, 5, 1, -44, 5, 10, 12, 33, 1]
     k = 3
 
     print('Brute force: ', solve1(numList, k))
     print('Deque:       ', solve2(numList, k))
-        

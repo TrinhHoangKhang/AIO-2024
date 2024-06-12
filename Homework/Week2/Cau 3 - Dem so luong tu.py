@@ -7,6 +7,8 @@ với key là từ và value là số lần từ đó xuất hiện.
 '''
 
 file_path = 'E:\AIO 2024\AIO-2024\AIO-2024\Homework\Week2\P1_data.txt'
+
+
 def count_words(file_path):
     result = {}
 
@@ -17,7 +19,7 @@ def count_words(file_path):
 
     # Duyệt từng dòng
     for line in lines:
-        words = line.split() # Tách từ trong dòng
+        words = line.split()  # Tách từ trong dòng
 
         # Duyệt từng từ
         for word in words:
@@ -29,6 +31,7 @@ def count_words(file_path):
 
     sorted_result = {key: result[key] for key in sorted(result.keys())}
     return sorted_result
+
 
 # Test
 if __name__ == '__main__':

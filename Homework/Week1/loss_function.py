@@ -1,11 +1,12 @@
 import math
 import random
 
+
 def compute_loss():
     '''
     This function computes loss value 
     Available loss functions: MSE, MAE, RMSE
-    
+
     '''
     # Get number of samples
     print('Input number of samples (integer number) which are generated: ', end='')
@@ -15,38 +16,39 @@ def compute_loss():
     if not n.isnumeric():
         print('number of samples must be an integer number')
         return
-    
+
     n = int(n)
 
     # Get loss name
-    print('Input loss name ', end = '')
+    print('Input loss name ', end='')
     loss = input()
 
     # Check
     if loss not in ['MSE', 'MAE', 'RMSE']:
         print(f'{loss} is not supported')
         return
-    
+
     # Compute
-    finalLoss = 0
-    for i in range (0, n):
+    final_loss = 0
+    for i in range(0, n):
         pred = random.uniform(0, 10)
         target = random.uniform(0, 10)
 
         if loss == 'MAE':
-            lossValue = math.fabs(target - pred)
+            loss_value = math.fabs(target - pred)
         elif (loss == 'MSE') or (loss == 'RMSE'):
-            lossValue = math.pow(target - pred, 2)
+            loss_value = math.pow(target - pred, 2)
 
-        finalLoss += lossValue
-        print(f'loss name: {loss}, sample: {i}, pred: {pred}, target: {target}, loss: {lossValue}')
+        final_loss += loss_value
+        print(
+            f'loss name: {loss}, sample: {i}, pred: {pred}, target: {target}, loss: {loss_value}')
 
     if loss == 'MAE':
-        finalLoss /= n
+        final_loss /= n
     elif loss == 'MSE':
-        finalLoss /= n
+        final_loss /= n
     elif loss == 'RMSE':
-        finalLoss = math.sqrt(finalLoss / n)
+        final_loss = math.sqrt(final_loss / n)
 
     print(f'final {loss}: {finalLoss}')
 
@@ -54,4 +56,3 @@ def compute_loss():
 # Test
 if __name__ == '__main__':
     compute_loss()
-    

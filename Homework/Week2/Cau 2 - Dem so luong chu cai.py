@@ -7,6 +7,8 @@ và value là số lần xuất hiện
 '''
 
 # Note: Khi đếm không phân biệt chữ hoa chữ thường
+
+
 def count_char(s):
     result = {}
 
@@ -20,6 +22,7 @@ def count_char(s):
 
     sorted_result = {key: result[key] for key in sorted(result.keys())}
     return sorted_result
+
 
 # Test
 if __name__ == '__main__':
