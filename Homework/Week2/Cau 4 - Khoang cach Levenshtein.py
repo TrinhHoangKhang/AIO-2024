@@ -98,12 +98,12 @@ def find_levenshtein_distance(s1, s2):
 if __name__ == '__main__':
     print('Test 1')
     print("From 'cat' to 'cot'")
-    find_Levenshtein_distance('cat', 'cot')
+    find_levenshtein_distance('cat', 'cot')
 
     print('\nTest 2')
     print("From 'kitten' to 'sitting'")
-    find_Levenshtein_distance('kitten', 'sitting')
+    find_levenshtein_distance('kitten', 'sitting')
 
     print('\nTest 3')
     print("From 'yu' to 'you'")
-    find_Levenshtein_distance('yu', 'you')
+    find_levenshtein_distance('yu', 'you')
