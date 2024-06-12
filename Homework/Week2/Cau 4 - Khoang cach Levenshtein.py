@@ -8,6 +8,52 @@ Mỗi bước được thực hiện 1 trong 3 thao tác: thêm, xóa, sửa
 '''
 
 
+def create_table(row, col, content=0):
+    table = []
+    for _ in range(row):
+        table.append([content]*col)
+    return table
+
+
+def prepare_table(s1, s2):
+    table = []
+    traceback = []
+
+    # Khởi tạo 2 bảng
+    table = create_table(len(s2) + 1, len(s1) + 1)
+    traceback = create_table(len(s2) + 1, len(s1) + 1, '')
+
+    # Dòng đầu tiên của bảng sẽ là: 0, 1, 2, 3, 4, ...
+    # Cột đầu tiên của bảng sẽ là: 0, 1, 2, 3, 4, ...
+    for i in range(1, len(s2) + 1):
+        table[i][0] = i
+        traceback[i][0] = 'add'
+    for j in range(1, len(s1) + 1):
+        table[0][j] = j
+        traceback[0][j] = 'del'
+
+    return table, traceback
+
+
+def route_trace_back(traceback, s1, s2):
+    i = len(s2)
+    j = len(s1)
+    route = []
+    while i > 0 or j > 0:
+        if traceback[i][j] == 'sub':
+            if (s1[j - 1] != s2[i - 1]):
+                route.append(f'sub: {s1[j - 1]} -> {s2[i - 1]}')
+            i -= 1
+            j -= 1
+        elif traceback[i][j] == 'add':
+            route.append(f'add: {s2[i - 1]}')
+            i -= 1
+        else:
+            route.append(f'del: {s1[j - 1]}')
+            j -= 1
+    return route[::-1]
+
+
 def find_levenshtein_distance(s1, s2):
     # Tạo một bảng có số hàng là len(s2) + 1, số cột là len(s1) + 1
 
@@ -17,25 +63,7 @@ def find_levenshtein_distance(s1, s2):
     table = []
     traceback = []
 
-    # Khởi tạo 2 bảng
-    for i in range(len(s2) + 1):
-        row = []
-        traceback_row = []
-        for j in range(len(s1) + 1):
-            row.append(0)
-            traceback_row.append('')
-
-        table.append(row)
-        traceback.append(traceback_row)
-
-    # Dòng đầu tiên của bảng sẽ là: 0, 1, 2, 3, 4, ...
-    # Cột đầu tiên của bảng sẽ là: 0, 1, 2, 3, 4, ...
-    for i in range(1, len(s1) + 1):
-        table[0][i] = i
-        traceback[0][i] = 'del'
-    for i in range(1, len(s2) + 1):
-        table[i][0] = i
-        traceback[i][0] = 'add'
+    table, traceback = prepare_table(s1, s2)
 
     # ========================================================================
     # Duyệt các ô và tính giá trị cho ô đó, đồng thời cập nhật traceback
@@ -65,28 +93,7 @@ def find_levenshtein_distance(s1, s2):
     # ========================================================================
     # Dùng traceback để truy ngước lại đường đi và in ra kết quả
     route = []
-    i = len(s2)  # Bắt đầu tại vị trí góc dưới bên phải
-    j = len(s1)
-    current_position = traceback[i][j]
-    while current_position != '':
-        if current_position == 'sub':
-            if s1[j - 1] != s2[i - 1]:
-                route.append(f'sub: {s1[j - 1]} -> {s2[i - 1]}')
-            i -= 1
-            j -= 1
-
-        if current_position == 'add':
-            route.append(f'add: {s2[i - 2]}')
-            i -= 1
-
-        if current_position == 'del':
-            route.append(f'del: {s1[j - 2]}')
-            j -= 1
-
-        current_position = traceback[i][j]
-
-    # Đảo ngược route do ta nạp ngược từ dưới lên
-    route = route[::-1]
+    route = route_trace_back(traceback, s1, s2)
 
     # In kết quả
     print(f'Cần tổng cộng {table[-1][-1]} bước')
