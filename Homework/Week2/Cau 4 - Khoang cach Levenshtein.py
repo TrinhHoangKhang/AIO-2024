@@ -7,7 +7,8 @@ Mỗi bước được thực hiện 1 trong 3 thao tác: thêm, xóa, sửa
 
 '''
 
-def find_Levenshtein_distance(s1, s2):
+
+def find_levenshtein_distance(s1, s2):
     # Tạo một bảng có số hàng là len(s2) + 1, số cột là len(s1) + 1
 
     # Tạo thêm một bảng traceback để dò ngược lại đường sau khi chúng ta tính xong
@@ -26,14 +27,14 @@ def find_Levenshtein_distance(s1, s2):
 
         table.append(row)
         traceback.append(traceback_row)
-    
+
     # Dòng đầu tiên của bảng sẽ là: 0, 1, 2, 3, 4, ...
     # Cột đầu tiên của bảng sẽ là: 0, 1, 2, 3, 4, ...
     for i in range(1, len(s1) + 1):
         table[0][i] = i
         traceback[0][i] = 'del'
     for i in range(1, len(s2) + 1):
-        table[i][0] = i 
+        table[i][0] = i
         traceback[i][0] = 'add'
 
     # ========================================================================
@@ -64,7 +65,7 @@ def find_Levenshtein_distance(s1, s2):
     # ========================================================================
     # Dùng traceback để truy ngước lại đường đi và in ra kết quả
     route = []
-    i = len(s2) # Bắt đầu tại vị trí góc dưới bên phải
+    i = len(s2)  # Bắt đầu tại vị trí góc dưới bên phải
     j = len(s1)
     current_position = traceback[i][j]
     while current_position != '':
@@ -73,15 +74,15 @@ def find_Levenshtein_distance(s1, s2):
                 route.append(f'sub: {s1[j - 1]} -> {s2[i - 1]}')
             i -= 1
             j -= 1
-        
+
         if current_position == 'add':
             route.append(f'add: {s2[i - 2]}')
             i -= 1
-    
+
         if current_position == 'del':
             route.append(f'del: {s1[j - 2]}')
             j -= 1
-        
+
         current_position = traceback[i][j]
 
     # Đảo ngược route do ta nạp ngược từ dưới lên
@@ -91,6 +92,7 @@ def find_Levenshtein_distance(s1, s2):
     print(f'Cần tổng cộng {table[-1][-1]} bước')
     for i in route:
         print(i)
+
 
 # Test
 if __name__ == '__main__':

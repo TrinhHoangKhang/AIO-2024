@@ -1,5 +1,6 @@
 import math
 
+
 def is_number(n):
     try:
         float(n)
@@ -7,11 +8,12 @@ def is_number(n):
         return False
     return True
 
+
 def compute_activation_function():
     '''
     This function computues the activation function value at x
     Available activation functions: sigmoid, relu, elu
-    
+
     '''
     # get x
     print('Input x = ', end='')
@@ -23,14 +25,14 @@ def compute_activation_function():
         return
 
     # Get activation function
-    print('Input activation Function (sigmoid|relu|elu): ', end = '')
+    print('Input activation Function (sigmoid|relu|elu): ', end='')
     activation_function = input()
 
     # Check
     if activation_function not in ['sigmoid', 'relu', 'elu']:
         print(f'{activation_function} is not supported')
         return
-    
+
     # Compute
     x = float(x)
     if activation_function == 'sigmoid':
@@ -40,18 +42,23 @@ def compute_activation_function():
     else:
         print(f'elu: f({x}) = {elu(x)}')
 
+
 def sigmoid(x):
     return 1 / (1 + math.exp(-x))
 
+
 def relu(x):
-    if x <= 0: return 0
+    if x <= 0:
+        return 0
     return x
 
-def elu(x, alpha = 0.01):
+
+def elu(x, alpha=0.01):
     if x <= 0:
         return alpha * (math.exp(x) - 1)
     return x
 
-# Test 
+
+# Test
 if __name__ == '__main__':
     compute_activation_function()
