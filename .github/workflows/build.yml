@@ -6,9 +6,12 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  sonarqube:
-    name: SonarQube
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.9]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -20,9 +23,9 @@ jobs:
       - name: Install tox and any other packages
         run: pip install tox
       - name: Run tox
-        run: tox -e py
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
+        run: tox -e py39
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
