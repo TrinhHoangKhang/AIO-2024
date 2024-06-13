@@ -8,12 +8,9 @@ def is_number(n):
         return False
     return True
 
-
-def compute_activation_function():
+def get_inputs():
     '''
-    This function computues the activation function value at x
-    Available activation functions: sigmoid, relu, elu
-
+    This function gets and validates the inputs from the user
     '''
     # get x
     print('Input x = ', end='')
@@ -22,7 +19,7 @@ def compute_activation_function():
     # Check
     if not is_number(x):
         print('x must be a number')
-        return
+        return None, None
 
     # Get activation function
     print('Input activation Function (sigmoid|relu|elu): ', end='')
@@ -31,17 +28,27 @@ def compute_activation_function():
     # Check
     if activation_function not in ['sigmoid', 'relu', 'elu']:
         print(f'{activation_function} is not supported')
-        return
+        return None, None
+
+    return float(x), activation_function
+
+
+def compute_activation_function(x = None, activation_function = None):
+    '''
+    This function computes the activation function value at x
+    Available activation functions: sigmoid, relu, elu
+    '''
+
+    if x is None or activation_function is None:
+        x, activation_function = get_inputs()
 
     # Compute
-    x = float(x)
     if activation_function == 'sigmoid':
         print(f'sigmoid: f({x}) = {sigmoid(x)}')
     elif activation_function == 'relu':
         print(f'relu: f({x}) = {relu(x)}')
     else:
         print(f'elu: f({x}) = {elu(x)}')
-
 
 def sigmoid(x):
     return 1 / (1 + math.exp(-x))
@@ -59,6 +66,4 @@ def elu(x, alpha=0.01):
     return x
 
 
-# Test
-if __name__ == '__main__':
-    compute_activation_function()
+compute_activation_function(0, 'relu')
