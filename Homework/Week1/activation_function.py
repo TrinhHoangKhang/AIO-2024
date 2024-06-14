@@ -8,10 +8,12 @@ def is_number(n):
         return False
     return True
 
+
 def get_inputs():
     '''
     This function gets and validates the inputs from the user
     '''
+
     # get x
     print('Input x = ', end='')
     x = input()
@@ -33,7 +35,7 @@ def get_inputs():
     return float(x), activation_function
 
 
-def compute_activation_function(x = None, activation_function = None):
+def compute_activation_function(x=None, activation_function=None):
     '''
     This function computes the activation function value at x
     Available activation functions: sigmoid, relu, elu
@@ -49,6 +51,7 @@ def compute_activation_function(x = None, activation_function = None):
         print(f'relu: f({x}) = {relu(x)}')
     else:
         print(f'elu: f({x}) = {elu(x)}')
+
 
 def sigmoid(x):
     return 1 / (1 + math.exp(-x))

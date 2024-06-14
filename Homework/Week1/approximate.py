@@ -22,7 +22,7 @@ def approx_sin(x, n):
     # Compute
     result = 0
     for i in range(0, n):
-        result += (-1)**i * (x**(2*i + 1)) / factorial(2*i + 1)
+        result += (-1)**i * (x**(2 * i + 1)) / factorial(2 * i + 1)
 
     print(result)
 
@@ -40,7 +40,7 @@ def approx_cos(x, n):
     # Compute
     result = 0
     for i in range(0, n):
-        result += (-1)**i * (x**(2*i)) / factorial(2*i)
+        result += (-1)**i * (x**(2 * i)) / factorial(2 * i)
 
     print(result)
 
@@ -58,7 +58,7 @@ def approx_sinh(x, n):
     # Compute
     result = 0
     for i in range(0, n):
-        result += (x**(2*i + 1)) / factorial(2*i + 1)
+        result += (x**(2 * i + 1)) / factorial(2 * i + 1)
 
     print(result)
 
@@ -76,7 +76,7 @@ def approx_cosh(x, n):
     # Compute
     result = 0
     for i in range(0, n):
-        result += (x**(2*i)) / factorial(2*i)
+        result += (x**(2 * i)) / factorial(2 * i)
 
     print(result)
 
