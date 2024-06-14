@@ -8,29 +8,50 @@ from io import StringIO
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../Homework/Week1')))
 import activation_function as af
 
-def test_is_number_valid():
-    assert af.is_number('1') == True
+def test_is_number_with_number():
+    assert af.is_number('3.14') == True
 
-def test_is_number_invalid():
+def test_is_number_with_non_number():
     assert af.is_number('abc') == False
 
-def test_sigmoid():
-    assert math.isclose(af.sigmoid(0), 0.5, rel_tol=1e-9)
+def test_sigmoid_with_positive_number():
+    x = 1
+    expected_output = 1 / (1 + math.exp(-x))
+    assert af.sigmoid(x) == expected_output
 
-def test_relu_positive():
-    assert af.relu(5) == 5
+def test_sigmoid_with_negative_number():
+    x = -1
+    expected_output = 1 / (1 + math.exp(-x))
+    assert af.sigmoid(x) == expected_output
 
-def test_relu_zero():
-    assert af.relu(0) == 0
+def test_relu_with_positive_number():
+    x = 1
+    expected_output = 1
+    assert af.relu(x) == expected_output
 
-def test_relu_negative():
-    assert af.relu(-5) == 0
+def test_relu_with_negative_number():
+    x = -1
+    expected_output = 0
+    assert af.relu(x) == expected_output
 
-def test_elu_positive():
-    assert af.elu(5) == 5
+def test_relu_with_zero():
+    x = 0
+    expected_output = 0
+    assert af.relu(x) == expected_output
 
-def test_elu_zero():
-    assert af.elu(0) == 0
+def test_elu_with_positive_number():
+    x = 1
+    expected_output = 1
+    assert af.elu(x) == expected_output
 
-def test_elu_negative():
-    assert af.elu(-5) == -0.9950041652780257
+def test_elu_with_negative_number():
+    x = -1
+    alpha = 0.01
+    expected_output = alpha * (math.exp(x) - 1)
+    assert af.elu(x) == pytest.approx(expected_output)
+
+def test_elu_with_zero():
+    x = 0
+    alpha = 0.01
+    expected_output = alpha * (math.exp(x) - 1)
+    assert af.elu(x) == pytest.approx(expected_output)
