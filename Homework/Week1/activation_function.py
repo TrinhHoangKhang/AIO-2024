@@ -64,6 +64,3 @@ def elu(x, alpha=0.01):
     if x <= 0:
         return alpha * (math.exp(x) - 1)
     return x
-
-
-compute_activation_function(0, 'relu')
