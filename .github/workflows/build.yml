@@ -24,6 +24,13 @@ jobs:
         run: pip install tox
       - name: Run tox
         run: tox -e py39
+      - name: List files for debugging
+        run: ls -R
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: coverage.xml
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
