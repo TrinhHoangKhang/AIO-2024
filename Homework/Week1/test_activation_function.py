@@ -5,7 +5,7 @@ import sys
 import os
 from io import StringIO
 
-# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../Homework/Week1')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../Homework/Week1')))
 import activation_function as af
 
 def test_is_number():
