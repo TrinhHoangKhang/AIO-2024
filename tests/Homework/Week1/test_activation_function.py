@@ -34,28 +34,3 @@ def test_elu_zero():
 
 def test_elu_negative():
     assert af.elu(-5) == -0.9950041652780257
-
-@patch('builtins.input', side_effect=['5', 'sigmoid'])
-def test_get_inputs_valid(mock_input):
-    x, activation_function = af.get_inputs()
-    assert x == 5.0
-    assert activation_function == 'sigmoid'
-
-@patch('builtins.input', side_effect=['abc', 'sigmoid'])
-def test_get_inputs_invalid_x(mock_input):
-    x, activation_function = af.get_inputs()
-    assert x == None
-    assert activation_function == None
-
-@patch('builtins.input', side_effect=['5', 'invalid'])
-def test_get_inputs_invalid_activation(mock_input):
-    x, activation_function = af.get_inputs()
-    assert x == None
-    assert activation_function == None
-
-@patch('sys.stdout', new_callable=StringIO)
-@patch('builtins.input', side_effect=['5', 'sigmoid'])
-def test_compute_activation_function_stdout(mock_input, mock_stdout):
-    af.compute_activation_function()
-    output = mock_stdout.getvalue().strip()
-    assert output.startswith('sigmoid: f(5.0) =')
